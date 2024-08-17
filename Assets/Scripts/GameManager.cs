@@ -33,6 +33,10 @@ public class GameManager : MonoBehaviour
     [field: SerializeField]
     public bool SoundsReplayerPlaying;
 
+    [SerializeField]
+    private UserInterfaceMain _uIMain;
+    [Space(15)]
+
     [Tooltip("List of all available sounds")]
     public Instrument[] InstrumentList;
 
@@ -45,10 +49,24 @@ public class GameManager : MonoBehaviour
     [Tooltip("Current Sounds that the player made")]
     public List<InstruVariant> CurrentSounds = new List<InstruVariant>();
 
+    [SerializeField]
+    private int _currentInstrumentNumber = 0;
+
+    [SerializeField]
+    [Range(0, 20)]
+    private int _maxInstrumentNumber = 0;
+
     public void CreateLevel()
     {
         Level.Clear();
-        for (int i = 0; i < BaseInstrumentNumberPerLevel + CurrentLevel; i++)
+        _currentInstrumentNumber = 0;
+        _currentInstrumentNumber = CurrentLevel + BaseInstrumentNumberPerLevel;
+        if(_currentInstrumentNumber > _maxInstrumentNumber)
+        {
+            _currentInstrumentNumber = _maxInstrumentNumber;
+        }
+
+        for (int i = 0; i < _currentInstrumentNumber; i++)
         {
             int randomValue = Random.Range(0, InstrumentList.Length);
             Level.Add(InstrumentList[randomValue].variants[Random.Range(0, InstrumentList[randomValue].variants.Count)]);
@@ -67,7 +85,6 @@ public class GameManager : MonoBehaviour
                 {
                     if (CurrentSounds[i].type != Level[i].type || CurrentSounds[i].soundType != Level[i].soundType)
                     {
-                        Debug.Log("Don't Match");
                         levelComplete = false;
                         break;
                     }
@@ -90,6 +107,7 @@ public class GameManager : MonoBehaviour
     public void LevelCompleted()
     {
         Debug.Log("Bravo");
+        CurrentLevel++;
     }
 
     public List<InstruVariant> GetLevelSoundList()

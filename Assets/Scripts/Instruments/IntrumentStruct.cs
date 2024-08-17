@@ -29,5 +29,4 @@ public struct InstruVariant
     public InstrumentSoundType soundType;
     public AudioClip instruSound;
     public string _name;
-
 }

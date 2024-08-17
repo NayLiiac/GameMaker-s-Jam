@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Replay the sounds required for the level
@@ -12,6 +13,8 @@ public class InstrumentReplayer : MonoBehaviour
     [SerializeField]
     [Range(0.5f, 10f)]
     private float _waitingTime;
+    [SerializeField]
+    private Button _replayerButton;
 
     public void ReplaySounds()
     {
@@ -32,5 +35,10 @@ public class InstrumentReplayer : MonoBehaviour
         }
 
         GameManager.Instance.SoundsReplayerPlaying = false;
+    }
+
+    public void SetActiveReplayerButton(bool b)
+    {
+        _replayerButton.enabled = b;
     }
 }

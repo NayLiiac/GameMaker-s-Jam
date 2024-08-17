@@ -71,4 +71,12 @@ public class InstrumentSetter : MonoBehaviour
     {
         SetSoundViaIndex(_soundsIndex);
     }
+
+    public void SetButtonsAndSliderActivity(bool b)
+    {
+        _nextButton.enabled = b;
+        _previousButton.enabled = b;
+        _soundScaler.enabled = b;
+        _playTestButton.enabled = b;
+    }
 }

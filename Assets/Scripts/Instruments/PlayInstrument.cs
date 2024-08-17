@@ -18,7 +18,9 @@ public class PlayInstrument : MonoBehaviour
 
     public void SetSound(InstruVariant instruVar)
     {
-        _soundSelected = instruVar.instruSound;
+        _tempInstru = instruVar;
+        _soundSelected = _tempInstru.instruSound;
+        Debug.Log(_soundSelected);
     }
 
     public void ConfirmInstrumentButton()
