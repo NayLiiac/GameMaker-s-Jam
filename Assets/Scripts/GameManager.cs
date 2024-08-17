@@ -58,6 +58,7 @@ public class GameManager : MonoBehaviour
 
     public void CreateLevel()
     {
+        CurrentSounds.Clear();
         Level.Clear();
         _currentInstrumentNumber = 0;
         _currentInstrumentNumber = CurrentLevel + BaseInstrumentNumberPerLevel;
@@ -108,6 +109,8 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Bravo");
         CurrentLevel++;
+        // Fermer rideau et lancer à nouveau
+        
     }
 
     public List<InstruVariant> GetLevelSoundList()

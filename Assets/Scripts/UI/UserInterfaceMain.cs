@@ -30,9 +30,11 @@ public class UserInterfaceMain : MonoBehaviour
     {
         GameManager.Instance.CreateLevel();
         // Fade the background
-        yield return _waitingTime;
+        yield return _waitingTime / 2;
 
-        InstruReplayer.ReplaySounds();
+        InstruReplayer.ReplayRequiredSounds();
+
+        yield return _waitingTime;
         InstruSetter.SetButtonsAndSliderActivity(true);
         InstruReplayer.SetActiveReplayerButton(true);
     }

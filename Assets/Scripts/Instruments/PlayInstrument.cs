@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 /// <summary>
 /// Used to play and add sounds required to complete the level
 /// </summary>
@@ -11,6 +13,14 @@ public class PlayInstrument : MonoBehaviour
     private InstruVariant _tempInstru;
     private AudioClip _soundSelected;
 
+    [SerializeField]
+    private Button _playTestButton;
+
+    [Tooltip("waiting time before playing an instrument again")]
+    [SerializeField]
+    [Range(0f, 15f)]
+    private float _waitingTime = 1.8f;
+
     private void Start()
     {
         _audioSource = GetComponent<AudioSource>();
@@ -20,12 +30,11 @@ public class PlayInstrument : MonoBehaviour
     {
         _tempInstru = instruVar;
         _soundSelected = _tempInstru.instruSound;
-        Debug.Log(_soundSelected);
     }
 
     public void ConfirmInstrumentButton()
     {
-        if(_audioSource != null && !GameManager.Instance.SoundsReplayerPlaying)
+        if (_audioSource != null && !GameManager.Instance.SoundsReplayerPlaying)
         {
             _audioSource.PlayOneShot(_soundSelected);
             GameManager.Instance.CurrentSounds.Add(_tempInstru);
@@ -38,6 +47,14 @@ public class PlayInstrument : MonoBehaviour
         if (_audioSource != null && !GameManager.Instance.SoundsReplayerPlaying)
         {
             _audioSource.PlayOneShot(_soundSelected);
+            _playTestButton.enabled = false;
+            StartCoroutine(WaitBeforePlayingInstrumentAgain());
         }
+    }
+
+    public IEnumerator WaitBeforePlayingInstrumentAgain()
+    {
+        yield return new WaitForSeconds(_waitingTime);
+        _playTestButton.enabled = true;
     }
 }
