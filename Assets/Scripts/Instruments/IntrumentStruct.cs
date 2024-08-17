@@ -6,7 +6,7 @@ public class IntrumentStruct : MonoBehaviour
 }
 public enum InstrumentType
 {
-    A, B, C
+    Bass, Drum, Piano, Guitar, Violin, X,
 }
 public enum InstrumentSoundType
 {
