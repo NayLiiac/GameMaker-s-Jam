@@ -109,7 +109,8 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Bravo");
         CurrentLevel++;
-        // Fermer rideau et lancer à nouveau
+        _uIMain.CurtainAnim.SetTrigger("Close");
+        _uIMain.PlayButton.gameObject.SetActive(true);
         
     }
 

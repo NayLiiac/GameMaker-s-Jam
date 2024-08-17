@@ -34,6 +34,7 @@ public class InstrumentReplayer : MonoBehaviour
         {
             _soundsReplayer.clip = instru[i].instruSound;
             _soundsReplayer.Play();
+            
             yield return new WaitForSeconds(_waitingTime);
         }
         SetActiveReplayerButton(true);

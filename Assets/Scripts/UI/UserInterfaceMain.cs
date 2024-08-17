@@ -1,11 +1,16 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UserInterfaceMain : MonoBehaviour
 {
     public InstrumentSetter InstruSetter;
     public InstrumentReplayer InstruReplayer;
+    public Animator CurtainAnim;
+
+    [field : SerializeField]
+    public Button PlayButton {  get; private set; }
 
     [SerializeField]
     private TextMeshProUGUI _levelText;
@@ -16,7 +21,6 @@ public class UserInterfaceMain : MonoBehaviour
 
     private void Start()
     {
-        _levelText.text = "Level " + GameManager.Instance.CurrentLevel.ToString();
         InstruSetter.SetButtonsAndSliderActivity(false);
         InstruReplayer.SetActiveReplayerButton(false);
     }
@@ -29,8 +33,9 @@ public class UserInterfaceMain : MonoBehaviour
     public IEnumerator StartingGame()
     {
         GameManager.Instance.CreateLevel();
-        // Fade the background
-        yield return _waitingTime / 2;
+        _levelText.text = "Level " + GameManager.Instance.CurrentLevel.ToString();
+        CurtainAnim.SetTrigger("Open");
+        yield return _waitingTime;
 
         InstruReplayer.ReplayRequiredSounds();
 
