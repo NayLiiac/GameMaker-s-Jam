@@ -7,13 +7,22 @@ public class UserInterfaceMain : MonoBehaviour
 {
     public InstrumentSetter InstruSetter;
     public InstrumentReplayer InstruReplayer;
+    public Health HealthScript;
     public Animator CurtainAnim;
 
     [field : SerializeField]
     public Button PlayButton {  get; private set; }
 
+    [field : SerializeField]
+    public Button QuitButton { get; private set; }
+
     [SerializeField]
     private TextMeshProUGUI _levelText;
+
+    [field : SerializeField]
+    public GameObject _levelWon { get; private set; }
+    [field : SerializeField]
+    public GameObject _gameLost { get; private set; }
 
     [SerializeField]
     [Range(0.5f, 10f)]
@@ -27,7 +36,15 @@ public class UserInterfaceMain : MonoBehaviour
 
     public void LevelAnnouncement()
     {
+        
+        if (GameManager.Instance.GameLost)
+        {
+            HealthScript.SetHealth(HealthScript._maxHealth);
+            GameManager.Instance.GameLost = false;
+        }
         StartCoroutine(StartingGame());
+        _levelWon.SetActive(false);
+        _gameLost.SetActive(false);
     }
 
     public IEnumerator StartingGame()

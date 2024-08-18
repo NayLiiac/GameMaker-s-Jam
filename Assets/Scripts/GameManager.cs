@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     /// </summary>
     [field: SerializeField]
     public bool SoundsReplayerPlaying;
+    public bool GameLost;
 
     [SerializeField]
     private UserInterfaceMain _uIMain;
@@ -97,6 +98,19 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("Skill Issue");
                 CurrentSounds.Clear();
+                _uIMain.HealthScript.SetHealth(_uIMain.HealthScript.HealthPoints - 1);
+                if (GameLost)
+                {
+                    _uIMain.CurtainAnim.SetTrigger("Close");
+                    _uIMain.PlayButton.gameObject.SetActive(true);
+                    _uIMain.QuitButton.gameObject.SetActive(true);
+
+                    _uIMain.InstruSetter.SetButtonsAndSliderActivity(false);
+                    _uIMain.InstruReplayer.SetActiveReplayerButton(false);
+
+                    CurrentLevel = 1;
+                    _uIMain._gameLost.SetActive(true);
+                }
             }
             else
             {
@@ -109,9 +123,15 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Bravo");
         CurrentLevel++;
+
         _uIMain.CurtainAnim.SetTrigger("Close");
+
         _uIMain.PlayButton.gameObject.SetActive(true);
-        
+        _uIMain.QuitButton.gameObject.SetActive(true);
+        _uIMain._levelWon.SetActive(true);
+
+        _uIMain.InstruSetter.SetButtonsAndSliderActivity(false);
+        _uIMain.InstruReplayer.SetActiveReplayerButton(false);
     }
 
     public List<InstruVariant> GetLevelSoundList()
