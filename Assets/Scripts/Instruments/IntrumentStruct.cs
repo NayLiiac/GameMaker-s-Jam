@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class IntrumentStruct : MonoBehaviour
 {
@@ -29,4 +30,5 @@ public struct InstruVariant
     public InstrumentSoundType soundType;
     public AudioClip instruSound;
     public string _name;
+    public GameObject MusicianLight;
 }

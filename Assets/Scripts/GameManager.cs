@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -57,6 +59,8 @@ public class GameManager : MonoBehaviour
     [Range(0, 20)]
     private int _maxInstrumentNumber = 0;
 
+    public event Action<InstruVariant> OnInstrumentPlayed;
+
     public void CreateLevel()
     {
         CurrentSounds.Clear();
@@ -70,8 +74,8 @@ public class GameManager : MonoBehaviour
 
         for (int i = 0; i < _currentInstrumentNumber; i++)
         {
-            int randomValue = Random.Range(0, InstrumentList.Length);
-            Level.Add(InstrumentList[randomValue].variants[Random.Range(0, InstrumentList[randomValue].variants.Count)]);
+            int randomValue = UnityEngine.Random.Range(0, InstrumentList.Length);
+            Level.Add(InstrumentList[randomValue].variants[UnityEngine.Random.Range(0, InstrumentList[randomValue].variants.Count)]);
         }
         Debug.Log("Level Created");
     }
@@ -137,5 +141,10 @@ public class GameManager : MonoBehaviour
     public List<InstruVariant> GetLevelSoundList()
     {
         return Level;
+    }
+
+    public void InstrumentPlayed(InstruVariant variant)
+    {
+        OnInstrumentPlayed?.Invoke(variant);
     }
 }

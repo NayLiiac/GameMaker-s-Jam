@@ -28,7 +28,14 @@ public class PlayInstrument : MonoBehaviour
 
     public void SetSound(InstruVariant instruVar)
     {
+        if(_tempInstru.MusicianLight != null)
+        {
+            InstruVariant oldInstru = _tempInstru;
+            oldInstru.MusicianLight.gameObject.SetActive(false);
+        }
+
         _tempInstru = instruVar;
+        _tempInstru.MusicianLight.gameObject.SetActive(true);
         _soundSelected = _tempInstru.instruSound;
     }
 
@@ -37,7 +44,9 @@ public class PlayInstrument : MonoBehaviour
         if (_audioSource != null && !GameManager.Instance.SoundsReplayerPlaying)
         {
             _audioSource.PlayOneShot(_soundSelected);
+            GameManager.Instance.InstrumentPlayed(_tempInstru);
             GameManager.Instance.CurrentSounds.Add(_tempInstru);
+
             GameManager.Instance.CheckLevel();
         }
     }
@@ -47,6 +56,7 @@ public class PlayInstrument : MonoBehaviour
         if (_audioSource != null && !GameManager.Instance.SoundsReplayerPlaying)
         {
             _audioSource.PlayOneShot(_soundSelected);
+            GameManager.Instance.InstrumentPlayed(_tempInstru);
             _playTestButton.enabled = false;
             StartCoroutine(WaitBeforePlayingInstrumentAgain());
         }
