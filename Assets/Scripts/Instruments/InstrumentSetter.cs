@@ -46,6 +46,7 @@ public class InstrumentSetter : MonoBehaviour
     {
         InstrumentPlayer.SetSound(GameManager.Instance.InstrumentList[soundIndex].variants[(int)_soundScaler.value]);
         _playTestButton.image.sprite = GameManager.Instance.InstrumentList[soundIndex]._instruSprite;
+
         Debug.Log(GameManager.Instance.InstrumentList[soundIndex].variants[(int)_soundScaler.value]._name);
     }
 

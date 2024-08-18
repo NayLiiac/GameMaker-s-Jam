@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +19,8 @@ public class InstrumentReplayer : MonoBehaviour
     [SerializeField]
     private Button _confirmedReplayerButton;
 
+   
+
     public void ReplayRequiredSounds()
     {
         if (!GameManager.Instance.SoundsReplayerPlaying)
@@ -34,7 +37,8 @@ public class InstrumentReplayer : MonoBehaviour
         {
             _soundsReplayer.clip = instru[i].instruSound;
             _soundsReplayer.Play();
-            
+            GameManager.Instance.InstrumentPlayed(instru[i]);
+
             yield return new WaitForSeconds(_waitingTime);
         }
         SetActiveReplayerButton(true);
@@ -57,7 +61,10 @@ public class InstrumentReplayer : MonoBehaviour
         {
             _soundsReplayer.clip = instru[i].instruSound;
             _soundsReplayer.Play();
+            GameManager.Instance.InstrumentPlayed(instru[i]);
+
             yield return new WaitForSeconds(_waitingTime / 2);
+
         }
         SetActiveReplayerButton(true);
         GameManager.Instance.SoundsReplayerPlaying = false;
