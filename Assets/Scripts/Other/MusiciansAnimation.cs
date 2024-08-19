@@ -34,7 +34,7 @@ public class MusiciansAnimation : MonoBehaviour
                 break;
             case InstrumentType.Guitar:
                 // Play Guitar Musician Anim
-
+                _musicians.SetTrigger("Guitarist");
                 break;
             case InstrumentType.Violin:
 
