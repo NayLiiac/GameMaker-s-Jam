@@ -7418,7 +7418,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You Lose... Retry ?
+  m_text: You Failed... Retry ?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b25ce986774549447ae877b3696b5fd9, type: 2}
   m_sharedMaterial: {fileID: 5078100244328824435, guid: b25ce986774549447ae877b3696b5fd9, type: 2}
@@ -7427,7 +7427,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 2365587455
+    rgba: 4294967295
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -7445,7 +7445,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 57.75
+  m_fontSize: 54
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
