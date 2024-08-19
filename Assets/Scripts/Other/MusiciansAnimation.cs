@@ -26,7 +26,7 @@ public class MusiciansAnimation : MonoBehaviour
                 break;
             case InstrumentType.Drum:
                 // Play Drum Musician Anim
-
+                _musicians.SetTrigger("Drummer");
                 break;
             case InstrumentType.Piano:
                 // Play Piano Musician Anim
