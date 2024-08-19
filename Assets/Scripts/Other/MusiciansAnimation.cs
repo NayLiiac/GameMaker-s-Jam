@@ -22,7 +22,7 @@ public class MusiciansAnimation : MonoBehaviour
         {
             case InstrumentType.Bass:
                 // Play Bass Musician Anim
-                
+                _musicians.SetTrigger("Bassist");
                 break;
             case InstrumentType.Drum:
                 // Play Drum Musician Anim
