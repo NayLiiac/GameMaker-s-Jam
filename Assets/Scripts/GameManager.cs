@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
         Level.Clear();
         _currentInstrumentNumber = 0;
         _currentInstrumentNumber = CurrentLevel + BaseInstrumentNumberPerLevel;
-        if(_currentInstrumentNumber > _maxInstrumentNumber)
+        if (_currentInstrumentNumber > _maxInstrumentNumber)
         {
             _currentInstrumentNumber = _maxInstrumentNumber;
         }
@@ -77,43 +77,39 @@ public class GameManager : MonoBehaviour
             int randomValue = UnityEngine.Random.Range(0, InstrumentList.Length);
             Level.Add(InstrumentList[randomValue].variants[UnityEngine.Random.Range(0, InstrumentList[randomValue].variants.Count)]);
         }
-        Debug.Log("Level Created");
     }
 
     public void CheckLevel()
     {
-        if (CurrentSounds.Count == Level.Count)
+        if (CurrentSounds.Count >= Level.Count)
         {
-            bool levelComplete = true;
+            bool levelCompleted = true;
             for (int i = 0; i < Level.Count; i++)
             {
                 for (int j = 0; j < Level.Count; j++)
                 {
                     if (CurrentSounds[i].type != Level[i].type || CurrentSounds[i].soundType != Level[i].soundType)
                     {
-                        levelComplete = false;
+                        levelCompleted = false;
                         break;
                     }
                 }
 
             }
-
-            if (!levelComplete)
+            if (!levelCompleted)
             {
                 Debug.Log("Skill Issue");
                 CurrentSounds.Clear();
                 _uIMain.HealthScript.SetHealth(_uIMain.HealthScript.HealthPoints - 1);
+
                 if (GameLost)
                 {
-                    _uIMain.CurtainAnim.SetTrigger("Close");
-                    _uIMain.PlayButton.gameObject.SetActive(true);
-                    _uIMain.QuitButton.gameObject.SetActive(true);
+                    _uIMain.CurtainAnim.SetTrigger("CloseLost");
 
                     _uIMain.InstruSetter.SetButtonsAndSliderActivity(false);
                     _uIMain.InstruReplayer.SetActiveReplayerButton(false);
 
                     CurrentLevel = 1;
-                    _uIMain._gameLost.SetActive(true);
                 }
             }
             else
@@ -125,14 +121,9 @@ public class GameManager : MonoBehaviour
 
     public void LevelCompleted()
     {
-        Debug.Log("Bravo");
         CurrentLevel++;
 
-        _uIMain.CurtainAnim.SetTrigger("Close");
-
-        _uIMain.PlayButton.gameObject.SetActive(true);
-        _uIMain.QuitButton.gameObject.SetActive(true);
-        _uIMain._levelWon.SetActive(true);
+        _uIMain.CurtainAnim.SetTrigger("CloseWon");
 
         _uIMain.InstruSetter.SetButtonsAndSliderActivity(false);
         _uIMain.InstruReplayer.SetActiveReplayerButton(false);

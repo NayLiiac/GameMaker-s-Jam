@@ -26,7 +26,6 @@ public class ButtonEffects : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void OnPointerEnter(PointerEventData eventData)
     {
         this.transform.localScale = _scaleEffect;
-        Debug.Log("Get bigger");
     }
 
     /// <summary>
@@ -36,6 +35,5 @@ public class ButtonEffects : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void OnPointerExit(PointerEventData eventData) 
     {
         this.transform.localScale = _scale;
-        Debug.Log("Get smaller");
     }
 }

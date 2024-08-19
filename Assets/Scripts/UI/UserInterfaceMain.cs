@@ -36,7 +36,6 @@ public class UserInterfaceMain : MonoBehaviour
 
     public void LevelAnnouncement()
     {
-        
         if (GameManager.Instance.GameLost)
         {
             HealthScript.SetHealth(HealthScript._maxHealth);

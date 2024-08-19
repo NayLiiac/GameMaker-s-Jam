@@ -8,6 +8,7 @@ public class Health : MonoBehaviour
     [field: SerializeField]
     [Range(0, 10)]
     public int HealthPoints;
+    [field: SerializeField]
     public int _maxHealth { get; private set; }
 
     private void Start()
@@ -17,7 +18,7 @@ public class Health : MonoBehaviour
 
     public void SetHealth(int health)
     {
-        if (health != 0)
+        if (health > 0)
         {
             if (_maxHealth != health)
             {
@@ -40,6 +41,7 @@ public class Health : MonoBehaviour
                 {
                     Hearts[i].SetActive(true);
                 }
+                HealthPoints = health;
             }
         }
         else
