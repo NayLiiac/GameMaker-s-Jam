@@ -40,6 +40,15 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private UserInterfaceMain _uIMain;
+
+    [Header("Audio")]
+    [SerializeField]
+    private AudioSource _audioSource;
+    [SerializeField]
+    private AudioClip _victory;
+    [SerializeField]
+    private AudioClip _lose;
+
     [Space(15)]
 
     [Tooltip("List of all available sounds")]
@@ -115,6 +124,9 @@ public class GameManager : MonoBehaviour
 
                     CurrentLevel = 1;
                 }
+
+                _audioSource.PlayOneShot(_lose);
+
             }
             else
             {
@@ -128,6 +140,7 @@ public class GameManager : MonoBehaviour
         CurrentLevel++;
 
         _uIMain.CurtainAnim.SetTrigger("CloseWon");
+        _audioSource.PlayOneShot(_victory);
 
         _uIMain.InstruSetter.SetButtonsAndSliderActivity(false);
         _uIMain.InstruReplayer.SetActiveReplayerButton(false);
