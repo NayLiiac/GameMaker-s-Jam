@@ -44,8 +44,10 @@ public class PlayInstrument : MonoBehaviour
         if (_audioSource != null && !GameManager.Instance.SoundsReplayerPlaying)
         {
             _audioSource.PlayOneShot(_soundSelected);
-            GameManager.Instance.InstrumentPlayed(_tempInstru);
             GameManager.Instance.CurrentSounds.Add(_tempInstru);
+            GameManager.Instance.InstrumentPlayed(_tempInstru);
+
+            GameManager.Instance.InstrumentPlayedVisualised();
 
             GameManager.Instance.CheckLevel();
         }

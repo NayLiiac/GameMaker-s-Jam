@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
     private int _maxInstrumentNumber = 0;
 
     public event Action<InstruVariant> OnInstrumentPlayed;
+    public event Action<InstruVariant> SendSpriteOnInstrumentPlayed;
 
     public void CreateLevel()
     {
@@ -101,6 +102,7 @@ public class GameManager : MonoBehaviour
             if (!levelCompleted)
             {
                 Debug.Log("Skill Issue");
+                _uIMain.VisualNotes.CleaningNotes();
                 CurrentSounds.Clear();
                 _uIMain.HealthScript.SetHealth(_uIMain.HealthScript.HealthPoints - 1);
 
@@ -129,6 +131,7 @@ public class GameManager : MonoBehaviour
 
         _uIMain.InstruSetter.SetButtonsAndSliderActivity(false);
         _uIMain.InstruReplayer.SetActiveReplayerButton(false);
+        _uIMain.VisualNotes.CleaningNotes();
     }
 
     public List<InstruVariant> GetLevelSoundList()
@@ -141,8 +144,20 @@ public class GameManager : MonoBehaviour
         OnInstrumentPlayed?.Invoke(variant);
     }
 
-    public void SetTutorialBubble(bool b) 
+    public void InstrumentPlayedVisualised()
     {
-        TutorialBubbles = b;
+        SendSpriteOnInstrumentPlayed?.Invoke(CurrentSounds[CurrentSounds.Count - 1]);
+    }
+
+    public void SetTutorialBubble() 
+    {
+        if (TutorialBubbles)
+        {
+            TutorialBubbles = false;
+        }
+        else
+        {
+            TutorialBubbles = true;
+        }
     }
 }
