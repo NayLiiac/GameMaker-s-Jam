@@ -14,6 +14,9 @@ public class ButtonEffects : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     [Tooltip("Valeur à laquelle la scale du bouton doit changer")]
     private Vector3 _scaleEffect;
 
+    [SerializeField]
+    private GameObject _tutorialBubble;
+
     private void Start()
     {
         _scale = transform.localScale;
@@ -26,6 +29,10 @@ public class ButtonEffects : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void OnPointerEnter(PointerEventData eventData)
     {
         this.transform.localScale = _scaleEffect;
+        if(_tutorialBubble != null && GameManager.Instance.TutorialBubbles)
+        {
+            _tutorialBubble.SetActive(true);
+        }
     }
 
     /// <summary>
@@ -35,5 +42,9 @@ public class ButtonEffects : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void OnPointerExit(PointerEventData eventData) 
     {
         this.transform.localScale = _scale;
+        if(_tutorialBubble != null && GameManager.Instance.TutorialBubbles)
+        {
+            _tutorialBubble.SetActive(false);
+        }
     }
 }

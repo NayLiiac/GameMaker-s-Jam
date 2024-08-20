@@ -14,13 +14,24 @@ public class AddSoundButton : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [SerializeField]
     private Image _buttonSprite;
 
+    [SerializeField]
+    private GameObject _tutorialBubble;
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         _buttonSprite.sprite = _addSoundButtonHighlightedSprite;
+        if (_tutorialBubble != null && GameManager.Instance.TutorialBubbles)
+        {
+            _tutorialBubble.SetActive(true);
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         _buttonSprite.sprite = _addSoundButtonOriginalSprite;
+        if (_tutorialBubble != null && GameManager.Instance.TutorialBubbles)
+        {
+            _tutorialBubble.SetActive(false);
+        }
     }
 }
