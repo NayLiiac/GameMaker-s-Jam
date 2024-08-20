@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
     [field: SerializeField]
     public bool SoundsReplayerPlaying;
     public bool GameLost;
+    [field: SerializeField]
+    public bool TutorialBubbles {  get; private set; }
 
     [SerializeField]
     private UserInterfaceMain _uIMain;
@@ -137,5 +139,10 @@ public class GameManager : MonoBehaviour
     public void InstrumentPlayed(InstruVariant variant)
     {
         OnInstrumentPlayed?.Invoke(variant);
+    }
+
+    public void SetTutorialBubble(bool b) 
+    {
+        TutorialBubbles = b;
     }
 }
