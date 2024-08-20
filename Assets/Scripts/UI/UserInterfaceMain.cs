@@ -8,6 +8,7 @@ public class UserInterfaceMain : MonoBehaviour
     public InstrumentSetter InstruSetter;
     public InstrumentReplayer InstruReplayer;
     public Health HealthScript;
+    public VisualisingNotes VisualNotes;
     public Animator CurtainAnim;
 
     [field : SerializeField]
